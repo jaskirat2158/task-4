@@ -1,22 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Stylish Webpage</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Project Implementation</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }header {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 1em;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        background-color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        padding: 14px 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+    }
+
+    nav ul li a:hover {
+        background-color: #575757;
+    }
+
+    .container {
+        padding: 2em;
+    }
+
+    /* Section Styling */
+    section {
+        margin-bottom: 2em;
+    }
+
+    .portfolio, .todo, .product-list {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 1em;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+        }
+    }
+</style>
+
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to My Stylish Webpage</h1>
-    <p>Hello there! I'm exploring the world of <strong>web development</strong> and this is my first page. 🎉</p>
+    <header>
+        <h1>Full Project Implementation</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#todo">To-Do App</a></li>
+            <li><a href="#product-list">Product Listing</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio">
+            <h2>Personal Portfolio</h2>
+            <p>Showcase your skills and projects here. Include sections like "About," "Projects," and "Contact."</p>
+        </section><!-- To-Do List Section -->
+    <section id="todo" class="todo">
+        <h2>To-Do List App</h2>
+        <p>Keep track of your tasks with a simple and effective to-do list.</p>
+        <input type="text" id="todoInput" placeholder="Enter a task">
+        <button class="btn" onclick="addTask()">Add Task</button>
+        <ul id="todoList"></ul>
+    </section>
 
-    <img src="hello.jpg" alt="A placeholder image">
+    <!-- Product Listing Section -->
+    <section id="product-list" class="product-list">
+        <h2>Product Listing</h2>
+        <p>Filter and sort products based on categories, price, or rating.</p>
+    </section>
+</div>
+<script>
+    // To-Do List Functionality
+    function addTask() {
+        const taskInput = document.getElementById('todoInput');
+        const taskList = document.getElementById('todoList');
 
-    <p>Here's a link to a great resource: <a href="https://www.youtube.com" target="_blank">youtube</a></p>
+        if (taskInput.value.trim() === '') {
+            alert('Please enter a task!');
+            return;
+        }
 
-    <button oneclick="showMessage()">Click Me!</button>
-  </div>
+        const li = document.createElement('li');
+        li.textContent = taskInput.value;
+        taskList.appendChild(li);
+        taskInput.value = '';
+
+        // Save to LocalStorage
+        localStorage.setItem('tasks', taskList.innerHTML);
+    }
+
+    // Load Tasks from LocalStorage
+    window.onload = () => {
+        const savedTasks = localStorage.getItem('tasks');
+        if (savedTasks) {
+            document.getElementById('todoList').innerHTML = savedTasks;
+        }
+    };
+</script>
 
 </body>
 </html>
